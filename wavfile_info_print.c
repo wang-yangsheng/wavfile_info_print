@@ -33,13 +33,15 @@ int main(int argc, char *argv[])
 	FILE *fp = NULL;
 	struct wav_file_head_info file_info;
 
-	if (argc < 2)
+	if (argc < 2) {
 		printf("%s [file.wav]\n", argv[0]);
+		return -1;
+	}
 
 	fp = fopen(argv[1], "rb");
 	if (fp == NULL) {
 		printf("fopen audio file failed\n");
-		exit(1);
+		return -1;
 	}
 
 	fread(&file_info, 1, sizeof(struct wav_file_head_info), fp);
